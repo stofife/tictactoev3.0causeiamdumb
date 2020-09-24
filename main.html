@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <div id="print"></div>
+        <div id="du"></div>
+        <div id="board"></div>
+        <div class="places">
+            <button id="1" onclick="getplayermove('board', 1)"></button>
+            <button id="2" onclick="getplayermove('board', 2)"></button>
+            <button id="3" onclick="getplayermove('board', 3)"></button>
+            <br>
+            <button id="4" onclick="getplayermove('board', 4)"></button>
+            <button id="5" onclick="getplayermove('board', 5)"></button>
+            <button id="6" onclick="getplayermove('board', 6)"></button>
+            <br>
+            <button id="7" onclick="getplayermove('board', 7)"></button>
+            <button id="8" onclick="getplayermove('board', 8)"></button>
+            <button id="9" onclick="getplayermove('board', 9)"></button>            
+        </div>
+    </head>
+    <body>
+        <script>
+            var board = {
+                1: "",
+                2: "",
+                3: "",
+                4: "",
+                5: "",
+                6: "",
+                7: "",
+                8: "",
+                9: "",
+            }
+
+            var win_1 = [1,2,3];
+            var win_2 = [4,5,6];
+            var win_3 = [7,8,9];
+            var win_4 = [1,4,7];
+            var win_5 = [2,5,8];
+            var win_6 = [3,6,9];
+            var win_7 = [1,5,9];
+            var win_8 = [3,5,7];
+
+            function iswon(board, letter){
+                if(letter == board[win_1[0]] && letter == board[win_1[1]] && letter == board[win_1[2]]){
+                    return true
+                }
+                if(letter == board[win_2[0]] && letter == board[win_2[1]] && letter == board[win_2[2]]){
+                    return true
+                }
+                if(letter == board[win_3[0]] && letter == board[win_3[1]] && letter == board[win_3[2]]){
+                    return true
+                }
+                if(letter == board[win_4[0]] && letter == board[win_4[1]] && letter == board[win_4[2]]){
+                    return true
+                }
+                if(letter == board[win_5[0]] && letter == board[win_5[1]] && letter == board[win_5[2]]){
+                    return true
+                }
+                if(letter == board[win_6[0]] && letter == board[win_6[1]] && letter == board[win_6[2]]){
+                    return true
+                }
+                if(letter == board[win_7[0]] && letter == board[win_7[1]] && letter == board[win_7[2]]){
+                    return true
+                }
+                if(letter == board[win_8[0]] && letter == board[win_8[1]] && letter == board[win_8[2]]){
+                    return true
+                }
+                return false
+            }
+
+            function isfree(board, spot){
+                return board[spot] == ""
+            }
+
+            function placeletter(board, letter, place){
+                board[place] = letter
+            }
+
+            function getaimove(board){
+                var free = availablespots(board)
+                if(isfree(board, 5)){
+                    placeletter(board, "o", 5)
+                }
+                if(isfree(board, 1)){
+                    placeletter(board, "o", 1)
+                }
+                if(isfree(board, 3)){
+                    placeletter(board, "o", 3)
+                }
+                if(isfree(board, 7)){
+                    placeletter(board, "o", 7)
+                }
+                if(isfree(board, 9)){
+                    placeletter(board, "o", 9)
+                }
+                document.getElementById("board").innerHTML = board;
+
+
+                printboard(board)
+            }
+
+            function getplayermove(board, spot){
+                if(isfree(board, spot)){
+                    placeletter(board, "x", spot)
+                }
+                printboard(board)
+            }
+
+            function availablespots(x){
+                available = 0;
+                for (let i = 0; i < 10; i++){
+                    spot = board[i];
+                    if (spot == ""){
+                        available = available + 1;
+                    }
+                }
+               return available;
+            }
+            function printboard(board){
+                var formboard = board
+                for (let i = 1; i < 11; i++){
+                    document.getElementById((i)).innerHTML=formboard[i];
+                }
+            }
+            //document.getElementById("print").innerHTML = iswon(board, "x");
+            //document.getElementById("du").innerHTML = availablespots(board);
+            //getaimove(board)
+
+
+        </script>
+    </body>
+</html>
