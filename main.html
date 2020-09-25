@@ -5,17 +5,17 @@
         <div id="du"></div>
         <div id="board"></div>
         <div class="places">
-            <button id="1" onclick="getplayermove('board', 1)"></button>
-            <button id="2" onclick="getplayermove('board', 2)"></button>
-            <button id="3" onclick="getplayermove('board', 3)"></button>
+            <button id="1" onclick="startgame(this.id)"></button>
+            <button id="2" onclick="startgame(this.id)"></button>
+            <button id="3" onclick="startgame(this.id)"></button>
             <br>
-            <button id="4" onclick="getplayermove('board', 4)"></button>
-            <button id="5" onclick="getplayermove('board', 5)"></button>
-            <button id="6" onclick="getplayermove('board', 6)"></button>
+            <button id="4" onclick="startgame(this.id)"></button>
+            <button id="5" onclick="startgame(this.id)"></button>
+            <button id="6" onclick="startgame(this.id)"></button>
             <br>
-            <button id="7" onclick="getplayermove('board', 7)"></button>
-            <button id="8" onclick="getplayermove('board', 8)"></button>
-            <button id="9" onclick="getplayermove('board', 9)"></button>            
+            <button id="7" onclick="startgame(this.id)"></button>
+            <button id="8" onclick="startgame(this.id)"></button>
+            <button id="9" onclick="startgame(this.id)"></button>            
         </div>
     </head>
     <body>
@@ -41,7 +41,7 @@
             var win_7 = [1,5,9];
             var win_8 = [3,5,7];
 
-            function iswon(board, letter){
+            function iswon(letter){
                 if(letter == board[win_1[0]] && letter == board[win_1[1]] && letter == board[win_1[2]]){
                     return true
                 }
@@ -69,45 +69,45 @@
                 return false
             }
 
-            function isfree(board, spot){
+            function isfree(spot){
                 return board[spot] == ""
             }
 
-            function placeletter(board, letter, place){
+            function placeletter(letter, place){
                 board[place] = letter
             }
 
-            function getaimove(board){
+            function getaimove(){
                 var free = availablespots(board)
-                if(isfree(board, 5)){
-                    placeletter(board, "o", 5)
+                if(isfree(5)){
+                    placeletter("o", 5)
                 }
-                if(isfree(board, 1)){
-                    placeletter(board, "o", 1)
+                if(isfree(1)){
+                    placeletter("o", 1)
                 }
-                if(isfree(board, 3)){
-                    placeletter(board, "o", 3)
+                if(isfree(3)){
+                    placeletter("o", 3)
                 }
-                if(isfree(board, 7)){
-                    placeletter(board, "o", 7)
+                if(isfree(7)){
+                    placeletter("o", 7)
                 }
-                if(isfree(board, 9)){
-                    placeletter(board, "o", 9)
+                if(isfree(9)){
+                    placeletter("o", 9)
                 }
-                document.getElementById("board").innerHTML = board;
+                //document.getElementById("board").innerHTML = board;
 
 
-                printboard(board)
+                printboard()
             }
 
-            function getplayermove(board, spot){
-                if(isfree(board, spot)){
-                    placeletter(board, "x", spot)
+            function getplayermove(spot){
+                if(isfree(spot)){
+                    placeletter("x", spot)
                 }
-                printboard(board)
+                printboard()
             }
 
-            function availablespots(x){
+            function availablespots(){
                 available = 0;
                 for (let i = 0; i < 10; i++){
                     spot = board[i];
@@ -117,7 +117,7 @@
                 }
                return available;
             }
-            function printboard(board){
+            function printboard(){
                 var formboard = board
                 for (let i = 1; i < 11; i++){
                     document.getElementById((i)).innerHTML=formboard[i];
@@ -127,6 +127,12 @@
             //document.getElementById("du").innerHTML = availablespots(board);
             //getaimove(board)
 
+            function startgame(place){
+                if(availablespots() > 0){
+                    getplayermove(place)
+                    getaimove()
+                }
+            }
 
         </script>
     </body>
